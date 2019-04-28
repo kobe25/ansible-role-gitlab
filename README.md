@@ -107,6 +107,7 @@ Gitlab system mail configuration. Disabled by default; set `gitlab_email_enabled
 
 Gitlab SMTP configuration; of `gitlab_smtp_enable` is `true`, the rest of the configuration will tell GitLab how to send mails using an smtp server.
 
+    gitlab_nginx_listen_address: '127.0.0.1'
     gitlab_nginx_listen_port: 8080
 
 If you are running GitLab behind a reverse proxy, you may want to override the listen port to something else.

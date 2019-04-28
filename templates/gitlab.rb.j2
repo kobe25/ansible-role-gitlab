@@ -39,6 +39,9 @@ gitlab_rails['ldap_base'] = '{{ gitlab_ldap_base }}'
 
 # GitLab Nginx
 ## See https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/nginx.md
+{% if gitlab_nginx_listen_address is defined %}
+nginx['listen_addresses'] = [ "{{ gitlab_nginx_listen_address }}" ]
+{% endif %}
 {% if gitlab_nginx_listen_port is defined %}
 nginx['listen_port'] = "{{ gitlab_nginx_listen_port }}"
 {% endif %}
