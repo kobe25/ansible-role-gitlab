@@ -59,6 +59,13 @@
     mode: 0700
   when: gitlab_create_self_signed_cert
 
+- name: Configure OpenSSL
+  ini_file:
+    path: /etc/ssl/openssl.cnf
+    section: ' v3_ca '
+    option: subjectAltName
+    value: 'IP:{{ gitlab_server_ip }}'
+
 - name: Create self-signed certificate.
   command: >
     openssl req -new -nodes -x509 -subj "{{ gitlab_self_signed_cert_subj }}"
@@ -74,3 +81,9 @@
     group: root
     mode: 0600
   notify: restart gitlab
+
+- name: Fetch GitLab CA
+  fetch:
+    src: /etc/gitlab/ssl/gitlab.crt
+    dest: ./gitlab.crt
+    flat: yes
